@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132394433710",
+    "project_id": "earlywarningsystem-a36d5",
+    "storage_bucket": "earlywarningsystem-a36d5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132394433710:android:b9d492622a65af60fac13f",
+        "android_client_info": {
+          "package_name": "com.example.earlywarningsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoHGuSKMV_HyKezTpu5Vuk722IBoGIYbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

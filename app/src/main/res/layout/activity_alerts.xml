@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Alerts">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🚨 Red Alerts"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="#D32F2F"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tvNoAlerts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No active alerts\n\n✓ All students are doing well"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="#388E3C"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/lvAlerts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:divider="#E0E0E0"
+        android:dividerHeight="8dp" />
+
+</LinearLayout>
