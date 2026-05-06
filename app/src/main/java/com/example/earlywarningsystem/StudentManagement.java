@@ -3,7 +3,9 @@ package com.example.earlywarningsystem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -45,6 +47,7 @@ public class StudentManagement extends AppCompatActivity {
         initViews();
         setupBorderZoneSpinner();
         loadParents();
+        loadAllStudents();
 
         btnAddStudent.setOnClickListener(v -> addStudent());
 
@@ -53,11 +56,26 @@ public class StudentManagement extends AppCompatActivity {
             String selectedPhone = (String) parent.getItemAtPosition(position);
             loadStudentsByParent(selectedPhone);
         });
+        // text watcher to check back to full list
+        autoParentPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    loadAllStudents(); // show all when cleared
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
     }
 
     private void initViews() {
         etName = findViewById(R.id.etName);
-        etPhone = findViewById(R.id.etPhone);
         etClass = findViewById(R.id.etClass);
         autoParentPhone = findViewById(R.id.autoParentPhone); // add in XML
         spinnerBorderZone = findViewById(R.id.spinnerBorderZone);
@@ -122,7 +140,7 @@ public class StudentManagement extends AppCompatActivity {
 
     private void addStudent() {
         String name = etName.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
+        String phone = autoParentPhone.getText().toString().trim();
         String studentClass = etClass.getText().toString().trim();
         String borderZone = spinnerBorderZone.getSelectedItem().toString();
 
@@ -146,10 +164,11 @@ public class StudentManagement extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Student added successfully", Toast.LENGTH_SHORT).show();
                 etName.setText("");
-                etPhone.setText("");
+                autoParentPhone.setText("");
                 etClass.setText("");
                 spinnerBorderZone.setSelection(0);
                 loadParents(); // refresh parent list
+                loadAllStudents(); // refresh full list immediately
             } else {
                 Toast.makeText(this, "Failed to add student", Toast.LENGTH_SHORT).show();
             }
@@ -171,4 +190,28 @@ public class StudentManagement extends AppCompatActivity {
             this.borderZone = borderZone;
         }
     }
+
+    private void loadAllStudents() {
+        studentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                studentList.clear();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Student s = child.getValue(Student.class);
+                    if (s != null) {
+                        studentList.add(s.name + " - " + s.studentClass + " (" + s.parentPhone + ")");
+                    }
+                }
+                studentAdapter = new ArrayAdapter<>(StudentManagement.this,
+                        android.R.layout.simple_list_item_1, studentList);
+                lvStudents.setAdapter(studentAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(StudentManagement.this, "Failed to load students", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

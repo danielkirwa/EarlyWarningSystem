@@ -9,7 +9,6 @@
     android:padding="12dp"
     tools:context=".StudentManagement">
 
-
     <!-- Title -->
     <TextView
         android:layout_width="match_parent"
@@ -52,38 +51,10 @@
                 android:layout_marginBottom="8dp" />
 
             <EditText
-                android:id="@+id/etPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Parent Phone (+254...)"
-                android:inputType="phone"
-                android:padding="12dp"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:layout_marginBottom="8dp" />
-
-            <EditText
                 android:id="@+id/etClass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Class/Grade"
-                android:padding="12dp"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sibling (if any):"
-                android:textSize="14sp"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp" />
-
-            <Spinner
-                android:id="@+id/spinnerSibling"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:background="#FFFFFF"
                 android:elevation="2dp"
@@ -105,24 +76,11 @@
                 android:background="#FFFFFF"
                 android:elevation="2dp"
                 android:layout_marginBottom="16dp" />
-
-            <Button
-                android:id="@+id/btnAddStudent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Student"
-                android:textSize="16sp"
-                android:padding="16dp"
-                android:background="#388E3C"
-                android:textColor="#FFFFFF"
-                android:elevation="4dp"
-                android:layout_marginBottom="24dp" />
-
             <!-- Search Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search by Parent Phone"
+                android:text="Search by Parent Phone for sibbling new"
                 android:textSize="14sp"
                 android:paddingTop="8dp"
                 android:paddingBottom="4dp" />
@@ -137,6 +95,20 @@
                 android:background="#FFFFFF"
                 android:elevation="2dp"
                 android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnAddStudent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Student"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:background="#388E3C"
+                android:textColor="#FFFFFF"
+                android:elevation="4dp"
+                android:layout_marginBottom="24dp" />
+
+
 
             <!-- Registered Students Section -->
             <TextView
@@ -159,5 +131,4 @@
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

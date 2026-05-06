@@ -133,7 +133,7 @@ public class Attendance extends AppCompatActivity implements LocationListener {
     }
 
     private void loadStudents() {
-        DatabaseReference studentsRef = FirebaseDatabase.getInstance().getReference("Students");
+        DatabaseReference studentsRef = FirebaseDatabase.getInstance("https://earlywarningsystem-a36d5-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Students");
 
         studentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -147,7 +147,7 @@ public class Attendance extends AppCompatActivity implements LocationListener {
                     String id = child.getKey();
                     String name = child.child("name").getValue(String.class);
                     String parentPhone = child.child("parentPhone").getValue(String.class);
-                    String studentClass = child.child("class").getValue(String.class);
+                    String studentClass = child.child("studentClass").getValue(String.class);
 
                     if (id == null) continue;
                     studentIds.add(id);
@@ -291,6 +291,7 @@ public class Attendance extends AppCompatActivity implements LocationListener {
         String studentName = studentNames.get(selectedPosition);
         String parentPhone = parentPhones.get(selectedPosition);
         String studentClass = studentClasses.get(selectedPosition);
+        String locationName = tvLocationAddress.getText().toString();
 
         int selectedRadioId = rgAttendance.getCheckedRadioButtonId();
         if (selectedRadioId == -1) {
@@ -307,14 +308,15 @@ public class Attendance extends AppCompatActivity implements LocationListener {
             Toast.makeText(this, "No GPS fix yet — attendance will be saved without coordinates", Toast.LENGTH_LONG).show();
         }
 
-        DatabaseReference attendanceRef = FirebaseDatabase.getInstance().getReference("Attendance");
+        DatabaseReference attendanceRef = FirebaseDatabase.getInstance("https://earlywarningsystem-a36d5-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Attendance");
         String attId = attendanceRef.push().getKey();
 
         AttendanceRecord record = new AttendanceRecord(attId, studentId, getCurrentDate(),
                 status,
                 Double.isNaN(currentLatitude) ? 0.0 : currentLatitude,
                 Double.isNaN(currentLongitude) ? 0.0 : currentLongitude,
-                crossedBorder);
+                crossedBorder,
+                locationName );
 
         attendanceRef.child(attId).setValue(record).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -384,11 +386,13 @@ public class Attendance extends AppCompatActivity implements LocationListener {
         public String id, studentId, date, status;
         public double latitude, longitude;
         public boolean crossedBorder;
+        public String locationName; // NEW
 
         public AttendanceRecord() {} // Needed for Firebase
 
         public AttendanceRecord(String id, String studentId, String date, String status,
-                                double latitude, double longitude, boolean crossedBorder) {
+                                double latitude, double longitude, boolean crossedBorder,
+                                String locationName) {
             this.id = id;
             this.studentId = studentId;
             this.date = date;
@@ -396,6 +400,7 @@ public class Attendance extends AppCompatActivity implements LocationListener {
             this.latitude = latitude;
             this.longitude = longitude;
             this.crossedBorder = crossedBorder;
+            this.locationName = locationName;
         }
     }
 
