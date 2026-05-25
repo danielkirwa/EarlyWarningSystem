@@ -28,6 +28,7 @@
             android:text="Select Student:"
             android:textSize="16sp"
             android:paddingTop="8dp"
+            android:textColor="#000000"
             android:paddingBottom="4dp" />
 
         <Spinner
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
+            android:textColor="#000000"
             android:background="#FFFFFF"
             android:elevation="2dp" />
 
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content"
             android:text="Attendance Status:"
             android:textSize="16sp"
+            android:textColor="#000000"
             android:paddingTop="16dp"
             android:paddingBottom="4dp" />
 
@@ -61,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="✓ Present"
                 android:textSize="16sp"
+                android:textColor="#000000"
                 android:padding="8dp" />
 
             <RadioButton
@@ -69,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="✗ Absent"
                 android:textSize="16sp"
+                android:textColor="#000000"
                 android:padding="8dp" />
 
             <RadioButton
@@ -77,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="⏱ Late"
                 android:textSize="16sp"
+                android:textColor="#000000"
                 android:padding="8dp" />
         </RadioGroup>
 
@@ -89,6 +95,7 @@
             android:padding="12dp"
             android:layout_marginTop="12dp"
             android:background="#FFF3E0"
+            android:textColor="#000000"
             android:elevation="2dp" />
 
         <TextView
@@ -97,6 +104,7 @@
             android:text="Current Location:"
             android:textSize="16sp"
             android:paddingTop="16dp"
+            android:textColor="#000000"
             android:paddingBottom="4dp" />
 
         <TextView
@@ -139,7 +147,7 @@
             android:text="ℹ Geofencing Active: SMS alerts will be sent to parents if student is marked absent. Border crossing detection enabled near Busia and Malaba."
             android:textSize="12sp"
             android:padding="16dp"
-            android:textColor="#757575"
+            android:textColor="#000000"
             android:background="#FFFDE7"
             android:layout_marginTop="16dp" />
 
